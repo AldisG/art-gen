@@ -6,19 +6,20 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generateimage = async (req, res) => {
-  const {prompt, size} = req.body // incoming data
-  const imageSize = size === 'small' ? '256x256' : size === 'medium' ? '512x512' : '1024x1024'
+  const { prompt, size } = req.body; // incoming data
+  const imageSize =
+    size === "small" ? "256x256" : size === "medium" ? "512x512" : "1024x1024";
   try {
     const response = await openai.createImage({
       prompt,
       n: 1,
       size: imageSize,
     });
-    const imageUrl = response.data.data[0].url
+    const imageUrl = response.data.data[0].url;
     res.status(200).json({
       success: true,
-      imageUrl
-    })
+      data: imageUrl,
+    });
   } catch (error) {
     if (error.response) {
       console.log(error.response.status);
@@ -28,10 +29,10 @@ const generateimage = async (req, res) => {
     }
     res.status(400).json({
       success: false,
-      imageUrl: '',
-      error: "Something went wrong, couldn't fetch the image url!"
-    })
+      imageUrl: "",
+      error: "Something went wrong, couldn't fetch the image url!",
+    });
   }
-}
+};
 
-module.exports = { generateimage }
+module.exports = { generateimage };

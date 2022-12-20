@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Test from "./components/Test.svelte";
-  export let name: string;
+  import GenerateImageSection from "./components/GenerateImageSection.svelte";
+  import HeaderWrapper from "./components/header_components/HeaderWrapper.svelte";
 </script>
 
 <main>
-  <div class="flex h-[100vh] justify-center items-center">
-    <div class="text-center">
-      <h1 class="text-4xl text-red-500">This is a {name} app!</h1>
-      <Test />
-    </div>
+  <div
+    class="flex flex-col h-[100vh] justify-start items-center py-20 gap-10  max-w-xl mx-auto"
+  >
+    <HeaderWrapper />
+    <GenerateImageSection />
   </div>
 </main>
 
