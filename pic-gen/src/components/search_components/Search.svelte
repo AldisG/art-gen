@@ -8,16 +8,16 @@
     { identifier: "select-size", array: ["large", "medium", "small"] },
     { identifier: "select-amount", array: [1, 2, 3, 4, 5] },
   ];
-  const findInputValue = (index: number) => formInputList[index].identifier;
+  const getInputValue = (index: number) => formInputList[index].identifier;
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     const { target } = e;
     const searchQuery = {
-      prompt: target[findInputValue(0)].value,
-      size: target[findInputValue(1)].value,
-      amount: target[findInputValue(2)].value,
+      prompt: target[getInputValue(0)].value,
+      size: target[getInputValue(1)].value,
+      amount: target[getInputValue(2)].value,
     };
-    // // data to send to backend
+    // data to send to backend
     console.table(searchQuery);
   };
 </script>
@@ -26,8 +26,8 @@
   <div class={searchInputStyle}>
     <input
       type="search"
-      name={findInputValue(0)}
-      id={findInputValue(0)}
+      name={getInputValue(0)}
+      id={getInputValue(0)}
       class={baseInputStyle}
     />
     <SearchButton />
