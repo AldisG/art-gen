@@ -5,7 +5,7 @@
 
 <main>
   <div
-    class="flex flex-col h-[100vh] justify-start items-center py-20 gap-10  max-w-xl mx-auto"
+    class="flex flex-col h-[100vh] justify-start items-center py-20 px-10 gap-10 mx-auto"
   >
     <HeaderWrapper />
     <GenerateImageSection />
