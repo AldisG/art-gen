@@ -1,24 +1,25 @@
 <script lang="ts">
+  import { requestArtwork } from "../utility/requestArtwork";
   import { baseInputStyle, formStyle, searchInputStyle } from "./inputStyle";
   import OptionSelect from "./OptionSelect.svelte";
   import SearchButton from "./SearchButton.svelte";
 
   const formInputList = [
     { identifier: "search-query", array: [] },
-    { identifier: "select-size", array: ["large", "medium", "small"] },
+    { identifier: "select-size", array: ["small", "large", "medium"] },
     { identifier: "select-amount", array: [1, 2, 3, 4, 5] },
   ];
+
   const getInputValue = (index: number) => formInputList[index].identifier;
+
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     const { target } = e;
-    const searchQuery = {
+    requestArtwork({
       prompt: target[getInputValue(0)].value,
       size: target[getInputValue(1)].value,
-      amount: target[getInputValue(2)].value,
-    };
-    // data to send to backend
-    console.table(searchQuery);
+      n: target[getInputValue(2)].value,
+    });
   };
 </script>
 
@@ -29,6 +30,7 @@
       name={getInputValue(0)}
       id={getInputValue(0)}
       class={baseInputStyle}
+      placeholder="Kitten eating icecream with birds"
     />
     <SearchButton />
   </div>

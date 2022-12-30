@@ -10,7 +10,7 @@
   <SmallText>{`Image ${inputType}`}</SmallText>
   <select name={selectType} id={selectType} class={baseInputStyle}>
     {#each dataArray as data, i}
-      <option default={!i} value={data}>{data}</option>
+      <option selected={!i || false} value={data}>{data}</option>
     {/each}
   </select>
 </div>
