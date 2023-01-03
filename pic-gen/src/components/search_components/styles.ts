@@ -7,3 +7,6 @@ export const formStyle =
   "mx-auto flex flex-col justify-center items-center w-full max-w-md gap-2";
 
 export const selectOptionsStyle = "flex flex-col gap-2 w-full pt-4";
+
+export const optionsContainerStyle =
+  "flex items-center w-full max-w-md space-x-4 h-full";

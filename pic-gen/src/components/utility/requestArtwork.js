@@ -1,6 +1,21 @@
+import { imageList } from "../../store/imageList.js";
+
+const updateStore = (newList, size, loading) => {
+  imageList.update(
+    (list) =>
+      (list = {
+        imageList: newList ? newList : imageList,
+        size,
+        loading,
+      })
+  );
+};
+
 export const requestArtwork = async ({ prompt, size, n }) => {
+  updateStore([], size, true); // reset store on search
+
   const apiUrl = "http://localhost:5000/openai/generateimage";
-  return await fetch(apiUrl, {
+  await fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,19 +26,15 @@ export const requestArtwork = async ({ prompt, size, n }) => {
       n,
     }),
   })
-    .then((res) => {
-      console.log({ prompt, size, n });
-      return res.json();
-    })
+    .then((res) => res.json())
     .then(({ data }) => {
-      console.log(data);
-      // return data;
+      if (data) {
+        updateStore(data, size, false);
+      }
     })
     .catch((err) => {
       console.log("Couldn't fetch anything due to an error!:", err);
-      // retun error
-    })
-    .finally(() => {
-      // retun nothing fetched
+      imageList.set((list) => (list = []));
+      updateStore([], size, false);
     });
 };
