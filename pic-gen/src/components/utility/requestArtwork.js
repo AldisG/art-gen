@@ -33,7 +33,7 @@ export const requestArtwork = async ({ prompt, size, n }) => {
       }
     })
     .catch((err) => {
-      console.log("Couldn't fetch anything due to an error!:", err);
+      console.log("Couldn't fetch anything due to an error!:", err.message);
       imageList.set((list) => (list = []));
       updateStore([], size, false);
     });

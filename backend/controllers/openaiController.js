@@ -8,15 +8,14 @@ const openai = new OpenAIApi(configuration);
 const generateimage = async (req, res) => {
   const { prompt, size, n } = req.body;
   const amount = parseInt(Number(n > 5 ? 5 : n));
-
   const imageSize =
     size === "small" ? "256x256" : size === "medium" ? "512x512" : "1024x1024";
 
   try {
     const response = await openai.createImage({
       prompt,
-      n: amount,
       size: imageSize,
+      n: amount,
     });
     const imageList = response.data.data;
     res.status(200).json({
